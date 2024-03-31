@@ -1,6 +1,6 @@
 const { AuthenticationError, signToken } = require('../utils/auth');
 
-const { Teller } = require('../models');
+const { Teller, Client } = require('../models');
 
 module.exports = {
     Query: {
@@ -9,7 +9,14 @@ module.exports = {
         },
         getTeller: async (_, args) => {
             return await Teller.findById(args.tellerId);
+        },
+        getAllClients: async () => {
+            return await Client.find({});
+        },
+        getClient: async (_, args) => {
+            return await Client.findById(args.clientId);
         }
+
     },
     Mutation: {
         createTeller: async (_, args) => {
@@ -34,6 +41,10 @@ module.exports = {
             const token = signToken(teller);
 
             return { token, teller};
+        },
+        createClient: async (_, args) => {
+            const client = await Client.create(args);
+            return client;
         }
     }
 };

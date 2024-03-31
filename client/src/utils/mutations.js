@@ -7,3 +7,16 @@ mutation login($username: String!, $password: String!) {
     token
   }
 }`; 
+
+// Client
+export const CREATE_CLIENT = gql`
+mutation createClient($firstName: String, $lastName: String, $email: String, $address: String, $phoneNumber: String) {
+  createClient(firstName: $firstName, lastName: $lastName, email: $email, address: $address, phoneNumber: $phoneNumber) {
+    _id
+    firstName
+    lastName
+    email
+    address
+    phoneNumber
+  }
+}`;

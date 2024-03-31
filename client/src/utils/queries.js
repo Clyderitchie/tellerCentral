@@ -11,7 +11,7 @@ query getTeller($tellerId: ID) {
 }
 `;
 
-export const QUERY_TELLERS =gql`
+export const QUERY_TELLERS = gql`
 query getAllTellers {
   getAllTellers {
     _id
@@ -19,4 +19,32 @@ query getAllTellers {
     email
     locationId
   }
-}`;
+}
+`;
+
+// Client
+export const QUERY_CLIENTS = gql`
+query getAllClients {
+  getAllClients {
+    _id
+    firstName
+    lastName
+    email
+    address
+    phoneNumber
+  }
+}
+`;
+
+export const QUERY_CLIENT = gql`
+query getClient($clientId: ID) {
+  getClient(clientId: $clientId) {
+    _id
+    firstName
+    lastName
+    email
+    address
+    phoneNumber
+  }
+}
+`;

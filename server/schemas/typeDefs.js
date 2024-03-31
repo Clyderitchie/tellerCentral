@@ -3,6 +3,7 @@ const gql = String.raw;
 module.exports = gql`
 
 type Teller {
+    _id: ID
     firstName: String
     lastName: String
     email: String

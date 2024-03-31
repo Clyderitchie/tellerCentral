@@ -35,19 +35,21 @@ const Login = ({ handleLogin }) => {
     return (
         <>
                 <div id="loginContainer" className="container d-flex justify-content-center align-items-center">
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center w-100">
                         <div className="col-8">
                             <div className="d-flex justify-content-center">
                                 <div className="login-form">
                                     <h2 className="login-title text-center mt-3">
                                         Login
                                     </h2>
+                                    <p className='text-center mt-1'>Please sign in to access your Teller Central profile.</p>
                                     <form className="d-flex flex-column" onSubmit={handleLoginSubmit}>
-                                        <input type="text" className="input-field loginInput" placeholder="Username" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
-                                        <input type="password" className="login-form loginInput" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                        <input type="text" className="input-field loginInput mt-1" placeholder="Username" value={loginUsername} onChange={(e) => setLoginUsername(e.target.value)} />
+                                        <input type="password" className="login-form loginInput mt-2" placeholder="Password" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                                         <div className="d-flex justify-content-end">
-                                            <button className='submit-button btn btn-dark' type="submit" disabled={loginLoading} >Login</button>
+                                            <button className='submit-button btn btn-dark w-100 mt-3' type="submit" disabled={loginLoading} >Login</button>
                                         </div>
+                                        <span id='loginBtn' className='d-flex justify-content-center w-100'></span>
                                     </form>
                                     {loginError && <p className='error-message'>Error: {loginError.message} </p>}
                                 </div>

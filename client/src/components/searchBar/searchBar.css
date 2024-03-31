@@ -1,0 +1,14 @@
+#search {
+    position: fixed;
+    top: 38%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#searchBar {
+    max-width: 45%;
+    margin-right: .5%;
+}

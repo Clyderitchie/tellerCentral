@@ -1,31 +1,36 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useLazyQuery } from '@apollo/client';
+import { QUERY_CLIENT } from '../../utils/queries';
 
 import './searchBar.css';
 
 function SearchBar({ tellerId }) {
 
+    const [searchInput, setSearchInput] = useState('');
+    const [searchClient, { loading, data, error }] = useLazyQuery(QUERY_CLIENT);
+    const clients = data?.getClient || {};
+    useEffect(() => { }, [clients]);
+
+    // const handleChange = (event) => {
+    //     setSearchInput(event.target.value);
+    // };
+
+    const handleSearch = (event) => {
+        setSearchInput(event.target.value)
+        searchClient({ variables: { searchInput: searchInput }, fetchPolicy: 'cache-and-network' });
+    };
+
+    console.log('Search data:', clients);
+
     return (
         <>
-
             <div id='search' className="input-group mb-3">
-                <input id="searchBar" type="text" className="form-control" aria-label="Sizing example input"
-                    aria-describedby="inputGroup-sizing-default" placeholder='Search' />
-                <div id='searchBtn' className="dropdown">
-                    <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Search
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">Name</a></li>
-                        <li><a className="dropdown-item" href="#">Acct</a></li>
-                        <li><a className="dropdown-item" href="#">DC</a></li>
-                        <li><a className="dropdown-item" href="#">TIN</a></li>
-                        <li><a className="dropdown-item" href="#">Phone number</a></li>
-                        <li><a className="dropdown-item" href="#">Address</a></li>
-                        <li><a className="dropdown-item" href="#">Cust. Number</a></li>
-                    </ul>
-                </div>
+                <button id='searchBtn' className="btn btn-dark" type="submit" onClick={handleSearch}>Search</button>
+                <input type="text" className="form-control rounded-end" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" value={searchInput} onChange={(e) => {setSearchInput(e.target.value)}} />
             </div>
+
         </>
     )
 };

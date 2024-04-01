@@ -14,7 +14,24 @@ module.exports = {
             return await Client.find({});
         },
         getClient: async (_, args) => {
-            return await Client.findById(args.clientId);
+            const { clientId, firstName, lastName, email, address, phoneNumber } = args;
+
+            const filter = {};
+            if (clientId) filter._id = clientId;
+            if (firstName) filter.firstName = firstName;
+            if (lastName) filter.lastName = lastName;
+            if (email) filter.email = email;
+            if (address) filter.address = address;
+            if (phoneNumber) filter.phoneNumber = phoneNumber;
+            try {
+                // Find clients based on the filter object
+                const clients = await Client.find(filter);
+                console.log("Clients: ", clients);
+                return clients;
+              } catch (error) {
+                throw new Error('Failed to fetch clients');
+              }
+              
         }
 
     },
@@ -40,7 +57,7 @@ module.exports = {
 
             const token = signToken(teller);
 
-            return { token, teller};
+            return { token, teller };
         },
         createClient: async (_, args) => {
             const client = await Client.create(args);

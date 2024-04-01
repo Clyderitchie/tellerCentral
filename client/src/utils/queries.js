@@ -37,8 +37,8 @@ query getAllClients {
 `;
 
 export const QUERY_CLIENT = gql`
-query getClient($clientId: ID) {
-  getClient(clientId: $clientId) {
+query getClient($clientId: ID, $firstName: String, $lastName: String, $email: String, $address: String, $phoneNumber: String) {
+  getClient(clientId: $clientId, firstName: $firstName, lastName: $lastName, email: $email, address: $address, phoneNumber: $phoneNumber) {
     _id
     firstName
     lastName

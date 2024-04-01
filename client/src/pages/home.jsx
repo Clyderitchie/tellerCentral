@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_TELLER } from '../utils/queries';
 
@@ -9,7 +10,8 @@ import SearchBar from '../components/searchBar/searchBar';
 
 function Home() {
     const tellerId = Auth.getProfile().data._id;
-    console.log("Home data: ", tellerId)
+    console.log("Home data: ", tellerId);
+
     return (
         <>
             <Nav/>

@@ -30,7 +30,7 @@ type Query {
     getAllTellers: [Teller]
     getTeller(tellerId: ID): Teller
     getAllClients: [Client]
-    getClient(clientId: ID): Client
+    getClient(clientId: ID, firstName: String, lastName: String, email: String, address: String, phoneNumber: String ): [Client]
 }
 
 type Mutation {

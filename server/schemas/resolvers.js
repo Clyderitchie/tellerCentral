@@ -1,6 +1,6 @@
 const { AuthenticationError, signToken } = require('../utils/auth');
 
-const { Teller, Client } = require('../models');
+const { Teller, Client, Account } = require('../models');
 
 module.exports = {
     Query: {
@@ -25,14 +25,20 @@ module.exports = {
             if (phoneNumber) filter.phoneNumber = phoneNumber;
             try {
                 // Find clients based on the filter object
-                const clients = await Client.find(filter);
+                const clients = await Client.find(filter).populate('accounts');
                 console.log("Clients: ", clients);
                 return clients;
               } catch (error) {
                 throw new Error('Failed to fetch clients');
               }
               
-        }
+        },
+        getAllAccounts: async () => {
+			return await Account.find({}); 
+		},
+		getAccount: async (_, args) => {
+			return await Account.findById(args.accountId).populate("clientId"); 
+		},
 
     },
     Mutation: {
@@ -62,6 +68,11 @@ module.exports = {
         createClient: async (_, args) => {
             const client = await Client.create(args);
             return client;
-        }
+        },
+        createAccount: async (_, args) => {
+			const acct = await Account.create(args); 
+			 await Client.findOneAndUpdate({_id: args.clientId}, {$push: { accounts: acct._id } }, { new: true } )
+			 return acct.populate("clientId") // Working in sandbox
+		},
     }
 };

@@ -1,6 +1,6 @@
 const { AuthenticationError, signToken } = require('../utils/auth');
 
-const { Teller, Client, Account } = require('../models');
+const { Teller, Client, Account, Service } = require('../models');
 
 module.exports = {
     Query: {
@@ -26,7 +26,7 @@ module.exports = {
             if (tin) filter.tin = tin;
             try {
                 // Find clients based on the filter object
-                const clients = await Client.find(filter).populate('accounts');
+                const clients = await Client.find(filter).populate('accounts').populate('services');
                 console.log("Clients: ", clients);
                 return clients;
               } catch (error) {
@@ -75,5 +75,10 @@ module.exports = {
 			 await Client.findOneAndUpdate({_id: args.clientId}, {$push: { accounts: acct._id } }, { new: true } )
 			 return acct.populate("clientId") 
 		},
+        createService: async (_, args) => {
+            const serv = await Service.create(args);
+            await Client.findByIdAndUpdate({_id: args.clientId}, {$push: { services: serv._id } }, { new: true } )
+            return serv.populate('clientId')
+        }
     }
 };

@@ -34,6 +34,10 @@ const ClientSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Account'
         }],
+        services: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Services'
+        }],
     },
     {
         toJSON: {

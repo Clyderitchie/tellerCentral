@@ -26,6 +26,7 @@ type Client {
     email: String
     address: String
     phoneNumber: String
+    tin: String
     accounts: [Account]
 }
 
@@ -38,7 +39,7 @@ type Query {
     getAllTellers: [Teller]
     getTeller(tellerId: ID): Teller
     getAllClients: [Client]
-    getClient(clientId: ID, firstName: String, lastName: String, email: String, address: String, phoneNumber: String ): [Client]
+    getClient(clientId: ID, firstName: String, lastName: String, email: String, address: String, phoneNumber: String, tin: String ): [Client]
     getAllAccounts: [Account]
     getAccount(accountId: ID): Account 
 }
@@ -46,7 +47,7 @@ type Query {
 type Mutation {
     createTeller( firstName: String, lastName: String, email: String, username: String, password: String, locationId: Int ): Auth
     login( username: String!, password: String! ): Auth
-    createClient( firstName: String, lastName: String, email: String, address: String, phoneNumber: String ): Client
+    createClient( firstName: String, lastName: String, email: String, address: String, phoneNumber: String, tin: String ): Client
     createAccount( accountType: String, balance: Int, clientId: ID!): Account
 }
 

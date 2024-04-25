@@ -14,7 +14,7 @@ module.exports = {
             return await Client.find({});
         },
         getClient: async (_, args) => {
-            const { clientId, firstName, lastName, email, address, phoneNumber } = args;
+            const { clientId, firstName, lastName, email, address, phoneNumber, tin } = args;
 
             const filter = {};
             if (clientId) filter._id = clientId;
@@ -23,6 +23,7 @@ module.exports = {
             if (email) filter.email = email;
             if (address) filter.address = address;
             if (phoneNumber) filter.phoneNumber = phoneNumber;
+            if (tin) filter.tin = tin;
             try {
                 // Find clients based on the filter object
                 const clients = await Client.find(filter).populate('accounts');
@@ -72,7 +73,7 @@ module.exports = {
         createAccount: async (_, args) => {
 			const acct = await Account.create(args); 
 			 await Client.findOneAndUpdate({_id: args.clientId}, {$push: { accounts: acct._id } }, { new: true } )
-			 return acct.populate("clientId") // Working in sandbox
+			 return acct.populate("clientId") 
 		},
     }
 };

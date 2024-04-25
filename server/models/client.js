@@ -30,14 +30,18 @@ const ClientSchema = new Schema(
         tin: {
             type: String
         },
-        accounts:[ {
+        accounts: [{
             type: Schema.Types.ObjectId,
             ref: 'Account'
         }],
         services: [{
             type: Schema.Types.ObjectId,
-            ref: 'Services'
+            ref: 'Service'
         }],
+        loans: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Loan'
+        }]
     },
     {
         toJSON: {

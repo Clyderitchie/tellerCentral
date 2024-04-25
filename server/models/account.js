@@ -4,7 +4,7 @@ const dateFormat = require('../utils/dateFormat');
 const AccountSchema = new Schema(
     {
         accountType: {
-            type: String,
+            type: String
         },
         balance: {
             type: Number

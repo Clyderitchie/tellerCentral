@@ -2,6 +2,13 @@ const gql = String.raw;
 
 module.exports = gql`
 
+type Loan {
+    _id: ID
+    lineOfCredit: String
+    auto: String
+    clientId: Client
+}
+
 type Service {
     _id: ID
     debitCard: String
@@ -38,6 +45,7 @@ type Client {
     tin: String
     accounts: [Account]
     services: [Service]
+    loans: [Loan]
 }
 
 type Auth {
@@ -60,6 +68,7 @@ type Mutation {
     createClient( firstName: String, lastName: String, email: String, address: String, phoneNumber: String, tin: String ): Client
     createAccount( accountType: String, balance: Int, clientId: ID!): Account
     createService( debitCard: String, checks: String, onlineBanking: String, creditCard: String, clientId: ID!): Service
+    createLoan( lineOfCredit: String, auto: String, clientId: ID!): Loan
 }
 
 `

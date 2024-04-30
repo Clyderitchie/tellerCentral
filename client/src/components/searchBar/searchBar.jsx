@@ -5,6 +5,7 @@ import { useLazyQuery } from '@apollo/client';
 import { QUERY_CLIENT } from '../../utils/queries';
 
 import './searchBar.css';
+import SearchResults from '../searchResults/searchResults';
 
 function SearchBar({ tellerId }) {
 
@@ -28,14 +29,7 @@ function SearchBar({ tellerId }) {
             </div>
 
             <div id='searchReturns'>
-                <h3 id='returnList'>Clients</h3>
-                {clients && clients.map((client) => (
-                    <Link id='returnedItems' to={`/customers/${client._id}`} key={client._id}>
-                        <li>
-                            {client.firstName} {client.lastName}
-                        </li>
-                    </Link>
-                ))}
+                <SearchResults searchInput={searchInput} clients={clients} />
             </div>
         </>
     )

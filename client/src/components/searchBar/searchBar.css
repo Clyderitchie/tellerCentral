@@ -1,6 +1,6 @@
 #search {
     position: fixed;
-    top: 48%;
+    top: 30%;
     left: 58%;
     transform: translate(-50%, -50%);
     display: flex;
@@ -12,24 +12,19 @@
 
 #searchBtn {
     max-width: 45%;
-    /* margin-right: .5%; */
 }
 
 #searchReturns {
     position: fixed;
-    top: 68%;
+    top: 55%;
     left: 58%;
     transform: translate(-50%, -50%);
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     max-width: 55%;
     min-width: 55%;
-}
-
-#returnList {
-    text-decoration: underline;
 }
 
 #returnedItems {
@@ -38,4 +33,7 @@
     color: black;
     font-size: larger;
     padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
 
-import './pages.css';
+import './loginPage.css';
 
 const Login = ({ handleLogin }) => {
     const [loginUsername, setLoginUsername] = useState('');

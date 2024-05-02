@@ -1,0 +1,39 @@
+#clientInfo{
+    position: absolute;
+    top: 50.5%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    /* outline: 2px solid green; */
+    width: 75%;
+}
+
+#customerInfo {
+    outline: 2px solid blue;
+    text-align: center;
+}
+
+#clientPersonalInfo{
+    margin-top: 2%;
+    outline: 2px solid black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1%;
+}
+
+#clientAccounts {
+    margin-top: 2%;
+    outline: 2px solid red;
+}
+
+#accountInfo {
+    outline: 1px dashed blueviolet;
+}
+
+#loanInfo {
+    outline: 2px solid purple;
+}
+
+#serviceInfo {
+    outline: 2px solid pink;
+}

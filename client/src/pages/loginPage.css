@@ -8,10 +8,10 @@
 
 .loginInput {
     width: 175%;
-}
+};
 
 #loginBtn {
     border-bottom: 1px solid gray;
     margin-top: 15%;
     width: 200%;
-}
+};

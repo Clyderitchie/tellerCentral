@@ -9,7 +9,7 @@ import './customerPage.css';
 import Nav from '../components/nav/nav';
 import Aside from '../components/aside/aside';
 
-function CustomerInfo() {
+function CustomerInfo({ tellerId }) {
     const { clientId } = useParams();
     const [clients, setClients] = useState([]);
 
@@ -28,7 +28,7 @@ function CustomerInfo() {
 
     return (
         <>
-            <Nav />
+            <Nav tellerId={tellerId}/>
             <Aside />
             <div id='clientInfo'>
                 <h1 id='customerInfo'>Customer Information</h1>
@@ -36,7 +36,7 @@ function CustomerInfo() {
                     <div key={client._id}>
                         <div id='clientPersonalInfo'>
                             <p>Name: {client.firstName} {client.lastName}</p>
-                            <p>Birthday: </p>
+                            <p>Birthday: {client.birthday}</p>
                             <p>Address: {client.address}</p>
                             <p>Phone number: {client.phoneNumber} </p>
                             <p>SSN/TIN: {client.tin}</p>

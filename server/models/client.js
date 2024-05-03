@@ -27,6 +27,9 @@ const ClientSchema = new Schema(
             type: String,
             // match: [/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/, 'That is not a valid phone number']
         },
+        birthday: {
+            type: String,
+        },
         tin: {
             type: String
         },

@@ -59,6 +59,8 @@ type Query {
     getTeller(tellerId: ID): Teller
     getAllClients: [Client]
     getClient(clientId: ID, firstName: String, lastName: String, email: String, address: String, phoneNumber: String, birthday: String, tin: String ): [Client]
+    getClientByFirstName(firstName: String): [Client]
+    getClientByLastName(lastName: String): [Client]
     getAllAccounts: [Account]
     getAccount(accountId: ID): Account 
 }

@@ -4,10 +4,10 @@ import { QUERY_CLIENT } from '../../utils/queries';
 
 import './result.css';
 
-function SearchResults({ searchInput, clients }) {
+function SearchResults({ searchQuery, clients }) {
 
     const filteredClients = clients.filter(client => {
-        return client.firstName.toLowerCase().includes(searchInput.toLowerCase()) || client.lastName.toLowerCase().includes(searchInput.toLowerCase());
+        return client.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || client.lastName.toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     return (

@@ -67,3 +67,97 @@ query getClient($clientId: ID, $firstName: String, $lastName: String, $email: St
   }
 }
 `;
+
+export const QUERY_FIRSTNAME = gql`
+query getClientByFirstName($firstName: String) {
+  getClientByFirstName(firstName: $firstName ) {
+    _id
+    firstName
+    lastName
+    email
+    address
+    phoneNumber
+    birthday
+    tin
+    accounts {
+      accountType
+      balance
+      _id
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+    services {
+      debitCard
+      checks
+      onlineBanking
+      creditCard
+      _id
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+    loans {
+      _id
+      lineOfCredit
+      auto
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+}
+`;
+
+export const QUERY_LASTNAME = gql`
+query getClientByLastName($lastName: String) {
+  getClientByLastName(lastName: $lastName) {
+    _id
+    firstName
+    lastName
+    email
+    address
+    phoneNumber
+    birthday
+    tin
+    accounts {
+      _id
+      accountType
+      balance
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+    services {
+      _id
+      debitCard
+      checks
+      onlineBanking
+      creditCard
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+    loans {
+      _id
+      lineOfCredit
+      auto
+      clientId {
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+}
+`;

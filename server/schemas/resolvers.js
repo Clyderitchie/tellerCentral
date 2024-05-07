@@ -13,30 +13,57 @@ module.exports = {
         getAllClients: async () => {
             return await Client.find({});
         },
+        getClientByFirstName: async (_, args) => {
+            return await Client.find({firstName: args.firstName});
+        },
+        getClientByLastName: async (_,args) => {
+            return await Client.find({lastName: args.lastName});
+        },
         getClient: async (_, args) => {
-            const { clientId, firstName, lastName, email, address, phoneNumber, tin } = args;
-
-            const filter = {};
-            if (clientId) filter._id = clientId;
-            if (firstName) filter.firstName = firstName;
-            if (lastName) filter.lastName = lastName;
-            if (email) filter.email = email;
-            if (address) filter.address = address;
-            if (phoneNumber) filter.phoneNumber = phoneNumber;
-            if (tin) filter.tin = tin;
+            const { searchInput } = args;
+        
             try {
-                // Find clients based on the filter object
-                const clients = await Client.find(filter)
-                    .populate('accounts')
-                    .populate('services')
-                    .populate('loans')
+                // Find clients whose firstName or lastName matches the searchInput
+                const clients = await Client.find({
+                    $or: [
+                        { firstName: { $regex: new RegExp(searchInput, "i") } },
+                        { lastName: { $regex: new RegExp(searchInput, "i") } }
+                    ]
+                })
+                .populate('accounts')
+                .populate('services')
+                .populate('loans');
+        
                 console.log("Clients: ", clients);
                 return clients;
             } catch (error) {
                 throw new Error('Failed to fetch clients');
             }
-
         },
+        // getClient: async (_, args) => {
+        //     const { clientId, firstName, lastName, email, address, phoneNumber, tin } = args;
+
+        //     const filter = {};
+        //     if (clientId) filter._id = clientId;
+        //     if (firstName) filter.firstName = firstName;
+        //     if (lastName) filter.lastName = lastName;
+        //     if (email) filter.email = email;
+        //     if (address) filter.address = address;
+        //     if (phoneNumber) filter.phoneNumber = phoneNumber;
+        //     if (tin) filter.tin = tin;
+        //     try {
+        //         // Find clients based on the filter object
+        //         const clients = await Client.find(filter)
+        //             .populate('accounts')
+        //             .populate('services')
+        //             .populate('loans')
+        //         console.log("Clients: ", clients);
+        //         return clients;
+        //     } catch (error) {
+        //         throw new Error('Failed to fetch clients');
+        //     }
+
+        // },
         getAllAccounts: async () => {
             return await Account.find({});
         },

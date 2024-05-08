@@ -9,17 +9,32 @@ import SearchResults from '../searchResults/searchResults';
 
 function SearchBar({ tellerId }) {
     const [searchQuery, setSearchQuery] = useState('');
-    const [getClientByFirstName, { error, loading, data }] = useLazyQuery(QUERY_FIRSTNAME)
-    const clients = data?.getClientByFirstName || [];
-    console.log('Search Bar data: ', clients);
+    const [clients, setClients] = useState([]);
+    const [getClientByFirstName, { error: firstNameError, loading: firstNameLoading, data: firstNameData }] = useLazyQuery(QUERY_FIRSTNAME);
+    const [getClientByLastName, { error: lastNameError, loading: lastNameLoading, data: lastNameData }] = useLazyQuery(QUERY_LASTNAME);
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
+    useEffect(() => {
+        if (firstNameData) {
+            setClients(firstNameData.getClientByFirstName || []);
+        }
+    }, [firstNameData]);
 
-    const handleSearch = (e) => {
-        setSearchQuery(e.target.value);
-        getClientByFirstName({ variables: { firstName: searchQuery } })
+    useEffect(() => {
+        if (lastNameData) {
+            setClients(lastNameData.getClientByLastName || []);
+        }
+    }, [lastNameData]);
+
+    const handleSearch = () => {
+        if (searchQuery.trim() !== '') {
+            // Search by first name
+            getClientByFirstName({ variables: { firstName: searchQuery.trim() } });
+            // Search by last name
+            getClientByLastName({ variables: { lastName: searchQuery.trim() } });
+        } else {
+            // Clear search results if search query is empty
+            setClients([]);
+        }
     };
 
     return (
@@ -30,10 +45,12 @@ function SearchBar({ tellerId }) {
                     value={searchQuery} onChange={(e) => { setSearchQuery(e.target.value) }} />
             </div>
 
-            {/* {showSearchResults && (
-                <div id='searchReturns'>
+            <div id='searchReturns'>
                     <SearchResults searchQuery={searchQuery} clients={clients} />
                 </div>
+
+            {/* {showSearchResults && (
+               
             )} */}
         </>
     )

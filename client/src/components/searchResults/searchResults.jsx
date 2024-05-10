@@ -7,7 +7,9 @@ import './result.css';
 function SearchResults({ searchQuery, clients }) {
 
     const filteredClients = clients.filter(client => {
-        return client.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || client.lastName.toLowerCase().includes(searchQuery.toLowerCase());
+        return client.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        client.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        client.tin.includes(searchQuery);
     });
 
     return (

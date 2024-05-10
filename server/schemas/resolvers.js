@@ -14,14 +14,17 @@ module.exports = {
             return await Client.find({});
         },
         getClientByFirstName: async (_, args) => {
-            return await Client.find({firstName: args.firstName});
+            return await Client.find({ firstName: args.firstName });
         },
-        getClientByLastName: async (_,args) => {
-            return await Client.find({lastName: args.lastName});
+        getClientByLastName: async (_, args) => {
+            return await Client.find({ lastName: args.lastName });
+        },
+        getClientByTin: async (_, args) => {
+            return await Client.find({ tin: args.tin })
         },
         getClient: async (_, args) => {
             const { searchInput } = args;
-        
+
             try {
                 // Find clients whose firstName or lastName matches the searchInput
                 const clients = await Client.find({
@@ -30,10 +33,10 @@ module.exports = {
                         { lastName: { $regex: new RegExp(searchInput, "i") } }
                     ]
                 })
-                .populate('accounts')
-                .populate('services')
-                .populate('loans');
-        
+                    .populate('accounts')
+                    .populate('services')
+                    .populate('loans');
+
                 console.log("Clients: ", clients);
                 return clients;
             } catch (error) {

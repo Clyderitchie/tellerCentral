@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/client';
-import { QUERY_FIRSTNAME, QUERY_LASTNAME } from '../../utils/queries';
+import { QUERY_FIRSTNAME, QUERY_LASTNAME, QUERY_TIN } from '../../utils/queries';
 
 import './searchBar.css';
 import SearchResults from '../searchResults/searchResults';
@@ -12,6 +12,7 @@ function SearchBar({ tellerId }) {
     const [clients, setClients] = useState([]);
     const [getClientByFirstName, { error: firstNameError, loading: firstNameLoading, data: firstNameData }] = useLazyQuery(QUERY_FIRSTNAME);
     const [getClientByLastName, { error: lastNameError, loading: lastNameLoading, data: lastNameData }] = useLazyQuery(QUERY_LASTNAME);
+    const [getClientByTin, { error: tinError, loading: tinLoading, data: tinData }] = useLazyQuery(QUERY_TIN);
 
     useEffect(() => {
         if (firstNameData) {
@@ -21,9 +22,15 @@ function SearchBar({ tellerId }) {
 
     useEffect(() => {
         if (lastNameData) {
-            setClients(lastNameData.getClientByLastName || []);
+            setClients(clients => [...clients, ...(lastNameData.getClientByLastName || [])]);
         }
     }, [lastNameData]);
+
+    useEffect(() => {
+        if(tinData) {
+            setClients(clients => [...clients, ...(tinData.getClientByTin || [])]);
+        }
+    }, [tinData]);
 
     const handleSearch = () => {
         if (searchQuery.trim() !== '') {
@@ -31,11 +38,15 @@ function SearchBar({ tellerId }) {
             getClientByFirstName({ variables: { firstName: searchQuery.trim() } });
             // Search by last name
             getClientByLastName({ variables: { lastName: searchQuery.trim() } });
+            // Search by tin
+            getClientByTin({ variables: { tin: searchQuery.trim() } });
         } else {
             // Clear search results if search query is empty
             setClients([]);
         }
     };
+
+    // console.log('Search data returned: ', tinData)
 
     return (
         <>
@@ -48,10 +59,6 @@ function SearchBar({ tellerId }) {
             <div id='searchReturns'>
                     <SearchResults searchQuery={searchQuery} clients={clients} />
                 </div>
-
-            {/* {showSearchResults && (
-               
-            )} */}
         </>
     )
 };

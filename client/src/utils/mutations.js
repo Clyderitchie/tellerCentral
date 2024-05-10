@@ -20,3 +20,13 @@ mutation createClient($firstName: String, $lastName: String, $email: String, $ad
     phoneNumber
   }
 }`;
+
+export const DELETE_CLIENT = gql`
+mutation deleteClient($clientId: ID!) {
+  deleteClient(clientId: $clientId) {
+    _id
+    firstName
+    lastName
+  }
+}
+`;

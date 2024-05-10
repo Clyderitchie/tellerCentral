@@ -103,6 +103,18 @@ module.exports = {
             const client = await Client.create(args);
             return client;
         },
+        deleteClient: async (_, { clientId }) => {
+            try {
+                // Find the client by ID and delete it
+                const deletedClient = await Client.findByIdAndDelete(clientId);
+                if (!deletedClient) {
+                    throw new Error('Client not found');
+                }
+                return deletedClient;
+            } catch (error) {
+                throw new Error(`Error deleting client: ${error.message}`);
+            }
+        },
         createAccount: async (_, args) => {
             const acct = await Account.create(args);
             await Client.findOneAndUpdate({ _id: args.clientId }, { $push: { accounts: acct._id } }, { new: true })

@@ -70,6 +70,7 @@ type Mutation {
     createTeller( firstName: String, lastName: String, email: String, username: String, password: String, locationId: Int ): Auth
     login( username: String!, password: String! ): Auth
     createClient( firstName: String, lastName: String, email: String, address: String, phoneNumber: String, birthday: String, tin: String ): Client
+    deleteClient( clientId: ID! ): Client
     createAccount( accountType: String, balance: Int, clientId: ID!): Account
     createService( debitCard: String, checks: String, onlineBanking: String, creditCard: String, clientId: ID!): Service
     createLoan( lineOfCredit: String, auto: String, clientId: ID!): Loan

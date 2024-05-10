@@ -61,6 +61,7 @@ type Query {
     getClient(clientId: ID, firstName: String, lastName: String, email: String, address: String, phoneNumber: String, birthday: String, tin: String ): [Client]
     getClientByFirstName(firstName: String): [Client]
     getClientByLastName(lastName: String): [Client]
+    getClientByTin(tin: String): [Client]
     getAllAccounts: [Account]
     getAccount(accountId: ID): Account 
 }

@@ -14,13 +14,13 @@ module.exports = {
             return await Client.find({});
         },
         getClientByFirstName: async (_, args) => {
-            return await Client.find({ firstName: args.firstName });
+            return await Client.find({ firstName: args.firstName }).populate('accounts');
         },
         getClientByLastName: async (_, args) => {
-            return await Client.find({ lastName: args.lastName });
+            return await Client.find({ lastName: args.lastName }).populate('accounts');
         },
         getClientByTin: async (_, args) => {
-            return await Client.find({ tin: args.tin })
+            return await Client.find({ tin: args.tin }).populate('accounts');
         },
         getClient: async (_, args) => {
             const { searchInput } = args;

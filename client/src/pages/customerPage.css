@@ -1,39 +1,51 @@
 #clientInfo{
-    position: absolute;
-    top: 50.5%;
+    position: relative;
     left: 60%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 7%);
     /* outline: 2px solid green; */
     width: 75%;
 }
 
 #customerInfo {
-    outline: 2px solid blue;
+    /* outline: 2px solid blue; */
     text-align: center;
+    position: relative;
 }
 
 #clientPersonalInfo{
     margin-top: 2%;
-    outline: 2px solid black;
+    /* outline: 2px solid black; */
     width: 100%;
     display: flex;
     flex-direction: column;
     padding-left: 1%;
 }
 
+#clientInfoBox{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#clientBox, #clientBox1{
+    display: flex;
+    flex-direction: column;
+}
+
+#clientName, #clientBirthday, #clientAddress, #clientPhone, #clientTin{
+    display: flex;
+    text-align: center;
+}
+
+#name, #birthday, #address, #phone, #tin{
+    text-align: end;
+    font-size: larger;
+
+}
+
 #clientAccounts {
-    margin-top: 2%;
-    outline: 2px solid red;
-}
-
-#accountInfo {
-    outline: 1px dashed blueviolet;
-}
-
-#loanInfo {
-    outline: 2px solid purple;
-}
-
-#serviceInfo {
-    outline: 2px solid pink;
+    margin-top: 1%;
+    display: block;
+    /* outline: 2px solid red; */
 }

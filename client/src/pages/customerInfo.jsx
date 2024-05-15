@@ -28,35 +28,69 @@ function CustomerInfo({ tellerId }) {
 
     return (
         <>
-            <Nav tellerId={tellerId}/>
+            <Nav tellerId={tellerId} />
             <Aside />
             <div id='clientInfo'>
                 <h1 id='customerInfo'>Customer Information</h1>
                 {clients.map(client => (
-                    <div key={client._id}>
-                        <div id='clientPersonalInfo'>
-                            <p>Name: {client.firstName} {client.lastName}</p>
-                            <p>Birthday: {client.birthday}</p>
-                            <p>Address: {client.address}</p>
-                            <p>Phone number: {client.phoneNumber} </p>
-                            <p>SSN/TIN: {client.tin}</p>
+                    <div id='clientPersonalInfo' key={client._id}>
+                        <div id='clientInfoBox'>
+                            <div id='clientBox'>
+                                <div id='clientName'>
+                                    <h4>Name:</h4>
+                                    <p id='name' className="ms-3">{client.firstName} {client.lastName}</p>
+                                </div>
+                                <div id='clientBirthday'>
+                                    <h4>Birthday:</h4>
+                                    <p id='birthday' className="ms-3">{client.birthday}</p>
+                                </div>
+                                <div id='clientAddress'>
+                                    <h4>Address:</h4>
+                                    <p id='address' className="ms-3">{client.address}</p>
+                                </div>
+                            </div>
+                            <div id='clientBox1'>
+                                <div id='clientPhone'>
+                                    <h4>Phone number:</h4>
+                                    <p id='phone' className="ms-3">{client.phoneNumber} </p>
+                                </div>
+                                <div id='clientTin'>
+                                    <h4>SSN/TIN:</h4>
+                                    <p id='tin' className="ms-3">{client.tin}</p>
+                                </div>
+                            </div>
                         </div>
+
                         <div id='clientAccounts'>
-                            <p>Accounts:</p>
                             {client.accounts.map(account => (
-                                <ul id='accountInfo'>
-                                    <li key={account._id}>
-                                        Account Type: {account.accountType}
-                                    </li>
-                                    <li key={account._id}>
-                                        Account balance: {account.balance}
-                                    </li>
-                                </ul>
+                                <div className="dropdown">
+                                    <button className="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Accounts:
+                                    </button>
+                                    <ul className="dropdown-menu w-50">
+                                        <li key={account._id}>
+                                            Account Type: {account.accountType}
+                                        </li>
+                                        <li key={account._id}>
+                                            Account balance: {account.balance}
+                                        </li>
+                                    </ul>
+                                </div>
                             ))}
                         </div>
-                        <div id='loanInfo'>
+                        {/* <div id='loanInfo'>
                             <p>Loans:</p>
                             {client.loans.map(loan => (
+                                <div className="dropdown">
+                                    <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <ul className="dropdown-menu">
+                                        <li key={loan._id}>
+                                            Loan Type:
+                                        </li>
+                                    </ul>
+                                </div>
                                 <ul id='loanAccount'>
                                     <li key={loan._id}>
                                         Loan Type:
@@ -66,7 +100,7 @@ function CustomerInfo({ tellerId }) {
                         </div>
                         <div id='serviceInfo' >
                             <p>Services</p>
-                        </div>
+                        </div> */}
                     </div>
                 ))}
             </div>
